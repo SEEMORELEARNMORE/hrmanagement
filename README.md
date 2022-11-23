@@ -10,6 +10,8 @@
 
 `后端：springboot + mysql`
 
+`工具：VSCode、IDEA`
+
 ## ✨ 功能
 
 ```
@@ -38,6 +40,7 @@
 测试普通员工： 账号—1170502 密码：000000
 可以试一下实时通信这个功能（一个浏览器进管理员账号发文章，另一个浏览器进普通员工账号可以看到实时消息通知）
 
+* 后端运行在8083端口
 * 员工工号是用部门号、职位号、序号拼接
 * department、edu_level、job三个表为代码表，表中的数据都是之前测试的时候乱写的，没有特意生成数据，可能比较乱
 * 有一些数据没有从后端获取了（和其他的逻辑一样的，就没有写了），比如登录用户考勤和薪资等
@@ -46,5 +49,15 @@
 ## 🚗 运行
 
 ```
-npm  install
+main分支为前端代码，master分支为后端代码
+
+git clone -b master https://github.com/SEEMORELEARNMORE/hrmanagement.git
+
+git clone -b main https://github.com/SEEMORELEARNMORE/hrmanagement.git
+
+cd hrmanagement
+
+npm install
+
+npm run serve
 ```
