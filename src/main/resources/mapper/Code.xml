@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrm.hrmanagement.mapper.CodeMapper">
+    <select id="findJob" resultType="java.lang.String">
+        SELECT description FROM job where code=#{code}
+    </select>
+    <select id="findDep" resultType="java.lang.String">
+                SELECT description FROM department where code=#{code}
+    </select>
+    <select id="findJobOptions" resultType="com.hrm.hrmanagement.entity.Code">
+        SELECT * FROM job
+    </select>
+    <select id="findDerOptions" resultType="com.hrm.hrmanagement.entity.Code">
+        SELECT * FROM department
+    </select>
+    <select id="findEduOptions" resultType="com.hrm.hrmanagement.entity.Code">
+        SELECT * FROM edu_level
+    </select>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrm.hrmanagement.mapper.SalaryMapper">
+    <select id="findAll" resultType="com.hrm.hrmanagement.entity.Salary">
+        SELECT * from salary
+    </select>
+    <select id="findbycondition" resultType="com.hrm.hrmanagement.entity.Salary">
+        select * from salary
+        <where>
+            <if test="name!=null and name!=''">
+                and name like concat("%", #{name}, "%")
+            </if>
+            <if test="id!=null and id!='' ">
+                and id like concat("%", #{id}, "%")
+            </if>
+            <if test="startTime!=null and startTime!='' ">
+                and month >= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!='' ">
+                and month &lt;=   #{endTime}
+            </if>
+        </where>
+    </select>
+</mapper>

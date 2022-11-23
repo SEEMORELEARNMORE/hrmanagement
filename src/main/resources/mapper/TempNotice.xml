@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrm.hrmanagement.mapper.TempNoticeMapper">
+    <insert id="addList">
+        insert into temp_notice(notice_id,user_id,state)
+        values  <foreach collection="ids" item="item" index="index" separator="," >
+        (
+        #{id},
+        #{item.id},
+        false
+        )
+    </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,23 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hrmanagement?serverTimezone=GMT
+    username: root
+    password: root
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+server:
+  port: 8083
+mybatis:
+  mapper-locations: classpath:mapper/*.xml #扫描所有xml文件
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 打印sql语句
+cors:
+  legal-clients: https://h5.shanhulicai.cn,https://p.blackfish.cn,https://depo.xwbank.com,http://omniaccount.com
+file:
+  uploadFolder: D:///szzb-welfarework/import/img/zzysj/

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrm.hrmanagement.mapper.AttendanceMapper">
+    <update id="update">
+        update attendance
+        <set>
+                finished=#{finished}
+        </set>
+        <where>
+            record_id=#{record_id}
+        </where>
+    </update>
+    <select id="findbycondition" resultType="com.hrm.hrmanagement.entity.Attendance">
+        select * from attendance
+        <where>
+        <if test="name!=null and name!=''">
+            and name like concat("%", #{name}, "%")
+        </if>
+            <if test="id!=null and id!=''">
+                and user_id like concat("%", #{id}, "%")
+            </if>
+            <if test="startTime!=null and startTime!=''">
+                and time >= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                and time &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+</mapper>

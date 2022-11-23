@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrm.hrmanagement.mapper.ChangeMapper">
+    <select id="findAll" resultType="com.hrm.hrmanagement.entity.Change">
+        SELECT * FROM personnel
+    </select>
+    <select id="findByCondition" resultType="com.hrm.hrmanagement.entity.Change">
+        select * from personnel
+        <where>
+            <if test="person!=null and person!='' ">
+            and person like concat("%", #{person}, "%")
+            </if>
+            <if test="changecode!=null">
+                and changecode = #{changecode}
+            </if>
+        </where>
+    </select>
+</mapper>

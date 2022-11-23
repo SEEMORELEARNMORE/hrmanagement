@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrm.hrmanagement.mapper.PersonMapper">
+    <select id="findAll" resultType="com.hrm.hrmanagement.entity.vo.PersonVo">
+        SELECT
+        person.id,passwd,person.name,authority,sex,birthday,
+        department.description department,job.description job,edu_level.description edu_level,spcialty,address,tel,email,state,remark,avatar FROM person,job,edu_level,department
+WHERE person.job=job.code AND person.edu_level=edu_level.code AND department.code=person.department
+    </select>
+    <select id="findAllId" resultType="com.hrm.hrmanagement.entity.vo.Id">
+        SELECT id FROM person
+    </select>
+    <select id="findNewId" resultType="integer">
+        select count(distinct id) from person where department=#{department} and job=#{job}
+    </select>
+    <select id="findByState" resultType="com.hrm.hrmanagement.entity.vo.PersonVo">
+        SELECT
+        person.id,passwd,person.name,authority,sex,birthday,
+        department.description department,job.description job,edu_level.description edu_level,spcialty,address,tel,email,state,remark,avatar FROM person,job,edu_level,department
+WHERE person.job=job.code AND person.edu_level=edu_level.code AND department.code=person.department and state=#{state}
+    </select>
+    <select id="findById" resultType="com.hrm.hrmanagement.entity.vo.PersonVo">
+         SELECT id,passwd,name,authority,sex,birthday,department.description department,job.description job,edu_level.description edu_level,spcialty,address,tel,email,state,remark,avatar FROM person,department,job,edu_level where id=#{id} and person.department=department.code and person.job = job.code and person.edu_level = edu_level.code
+    </select>
+    <select id="findByCondition" resultType="com.hrm.hrmanagement.entity.Person">
+
+        select * from person
+        <where>
+        <if test="name!=null and name!=''">
+            and name like concat("%", #{name}, "%")
+        </if>
+        <if test="id!=null and id!='' ">
+            and id like concat("%", #{id}, "%")1
+        </if>
+        <if test="state!=null and state!='' ">
+                and state = #{state}
+        </if>
+        <if test="department !=null">
+                and department = #{department}
+        </if>
+        <if test="job!=null">
+                and job = #{job}
+        </if>
+    </where>
+    </select>
+    <update id="update">
+    update person
+    <set>
+<!--    <if test="passwd!=null"></if> 一般密码单独修改-->
+    <if test="authority!=null">
+        authority=#{authority},
+    </if>
+    <if test="name!=null">
+        name=#{name},
+    </if>
+    <if test="sex!=null">
+        sex=#{sex},
+    </if>
+    <if test="birthday!=null">
+        birthday=#{birthday},
+    </if>
+    <if test="department!=null">
+        department=#{department},
+    </if>
+    <if test="job!=null">
+        job=#{job},
+    </if>
+    <if test="edu_level!=null">
+        edu_level=#{edu_level},
+    </if>
+    <if test="spcialty!=null">
+        spcialty=#{spcialty},
+    </if>
+    <if test="address!=null">
+        address=#{address},
+    </if>
+    <if test="tel!=null">
+        tel=#{tel},
+    </if>
+    <if test="email!=null">
+        email=#{email},
+    </if>
+    <if test="state!=null">
+        state=#{state},
+    </if>
+    <if test="remark!=null">
+        remark=#{remark}
+    </if>
+    </set>
+    <where>
+        id=#{id}
+    </where>
+</update>
+    <delete id="deleteById">
+          UPDATE  person SET state="R" WHERE id=#{id}
+    </delete>
+    <update id="toPositive">
+       UPDATE  person SET state="F" where id=#{id}
+    </update>
+    <update id="updatePsw">
+        update person set passwd=#{passwd} where id=#{id}
+    </update>
+    <update id="updateAuth">
+        update person set authority=1 where id=#{id}
+    </update>
+    <select id="divideByEdu" resultType="java.util.HashMap">
+        SELECT edu_level.description edu_level,COUNT(DISTINCT id) AS 'count' FROM person,edu_level  WHERE person.edu_level=edu_level.code GROUP BY edu_level
+    </select>
+    <select id="divideDep" resultType="java.util.HashMap">
+      SELECT department.description department,COUNT(DISTINCT person.id) AS 'count' FROM person,department  WHERE person.department=department.code GROUP BY person.department
+    </select>
+</mapper>

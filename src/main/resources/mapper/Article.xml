@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrm.hrmanagement.mapper.ArticleMapper">
+    <select id="findbycondition" resultType="com.hrm.hrmanagement.entity.Article">
+        select * from notice
+        <where>
+            <if test="id!=null and id!=''">
+                and id=#{id}
+            </if>
+            <if test="author!=null and author!=''">
+                and author like concat("%", #{author}, "%")
+            </if>
+            <if test="title!=null and title!=''">
+                and title like concat("%", #{title}, "%")
+            </if>
+            <if test="startTime!=null and startTime!=''">
+                and time >= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                and time &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+</mapper>
