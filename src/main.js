@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import '../theme/index.css'
+import '@/styles/index.css'
 import '@/icons'
 import * as echarts from 'echarts'
 // 需要挂载到Vue原型上
